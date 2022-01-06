@@ -1,15 +1,25 @@
-/* Write a function that takes in a non-empty array of integers that are sorted in 
-ascending order and returns a new array of the same length with the squares of the 
-original integers also sorted in the ascending order */
-
 function sortedSquaredArray(array) {
- 
-   const new_array = array.map ( val => val * val);
-    new_array.sort(function(a, b) {
-        return a - b;
-    });
-    return new_array;
-  }
-//"array": [-2, -1]
-array = [1,2,3,5,6,8,9];
-console.log(sortedSquaredArray(array));
+    let squared_array = new Array(array.length).fill(0);
+    let left_pointer = 0;
+    let right_pointer = array.length -1;
+
+    for(index = array.length -1; index >= 0 ; index --)
+    {
+        if ( Math.abs(array[left_pointer]) > Math.abs(array[right_pointer]) )
+        {
+            squared_array[index] = array[left_pointer] * array[left_pointer];
+            left_pointer += 1;
+        }
+        else 
+        {
+            squared_array[index] = array[right_pointer] * array[right_pointer];
+            right_pointer -= 1;
+        }
+    }
+
+    return squared_array;
+   
+   }
+ //"array": [-2, -1]
+ array = [-7, -5, -4, 3, 6, 8, 9];
+ console.log(sortedSquaredArray(array));
